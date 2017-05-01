@@ -109,6 +109,7 @@ public class UserController extends AbstractController {
         LOGGER.debug("Getting get user action" + userId);
         User user = userService.getUserById(userId);
         model.addAttribute("user", user);
+        model.addAttribute("groups", groupService.getAllGroups());
         model.addAttribute("password", "invisible");
         return "userForm";
     }

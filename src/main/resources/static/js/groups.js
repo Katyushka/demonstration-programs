@@ -2,7 +2,7 @@
  * Created by ekaterina on 30.04.2017.
  */
 function addGroup() {
-    $('#groupDialog').dialog("option", "title", 'Add Group');
+    $('#groupDialog').dialog("option", "title", 'Добавить группу');
     $('#groupDialog').dialog('open');
 }
 
@@ -12,7 +12,7 @@ function editGroup(id) {
 
         $("#groupDialog").html(result);
 
-        $('#groupDialog').dialog("option", "title", 'Edit Group');
+        $('#groupDialog').dialog("option", "title", 'Редактировать');
 
         $("#groupDialog").dialog('open');
     });
@@ -26,7 +26,7 @@ function deleteGroup(id) {
         width: 300,
         modal: true,
         buttons: {
-            "Delete group": function() {
+            "Удалить группу": function() {
                 $.ajax({
                     url: "/groups/delete/" + id,
                     type: "POST",
@@ -36,7 +36,7 @@ function deleteGroup(id) {
                 });
                 $( this ).dialog( "close" );
             },
-            Cancel: function() {
+            "Отменить": function() {
                 $( this ).dialog( "close" );
             }
         }
@@ -58,10 +58,10 @@ $(document).ready(function() {
         resizable : false,
         width : 440,
         buttons : {
-            "Save" : function() {
+            "Сохранить" : function() {
                 $('#groupForm').submit();
             },
-            "Cancel" : function() {
+            "Отменить" : function() {
                 $(this).dialog('close');
             }
         },
