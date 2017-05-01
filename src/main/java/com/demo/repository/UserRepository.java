@@ -1,0 +1,16 @@
+package com.demo.repository;
+
+import com.demo.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+/**
+ * @author Ekaterina Pyataeva on 24.04.2017.
+ */
+
+@Repository
+public interface UserRepository extends CrudRepository<User, Long> {
+    User findByEmail(String email);
+    User findById(Long id);
+}

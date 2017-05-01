@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ekaterina on 23.04.2017.
+ * @author Ekaterina Pyataeva on 23.04.2017.
  */
 
 @Entity
@@ -14,7 +14,6 @@ import java.util.List;
 public class Group extends BasicEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
 
     @Column(nullable = false)
     private String name;

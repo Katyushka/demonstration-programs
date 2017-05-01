@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Created by ekaterina on 24.04.2017.
+ * @author Ekaterina Pyataeva on 24.04.2017.
  */
 
 @MappedSuperclass
@@ -14,7 +14,6 @@ public class BasicEntity implements Serializable {
 
     @Id
     @GeneratedValue
-    @Column(nullable = false, updatable = false)
     private Long id;
 
     @Transient

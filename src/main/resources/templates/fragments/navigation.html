@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+<!-- Navbar -->
+<div class="navigation" id="navigation" th:fragment="navigation">
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <!--<a class="navbar-brand" href="#" th:href="@{/}"> О программе </a>-->
+
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/}" href="@#"> Главная </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/users}" href="/users"> Пользователи </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/groups}" href="/groups"> Группы </a></li>
+
+                    <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Войти </a></li>
+                </ul>
+                <th:block th:if="${currentUser != null}">
+                    <th:block>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+
+                                <ul class="dropdown-menu">
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="navbar-login navbar-login-session">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <p>
+                                                        <a th:href="@{/logout}" class="btn btn-danger btn-block">Logout</a>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </th:block>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

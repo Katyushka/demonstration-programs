@@ -1,12 +1,14 @@
 package com.demo.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ekaterina on 23.04.2017.
+ * @author Ekaterina Pyataeva on 23.04.2017.
  */
 
 @Entity
@@ -15,34 +17,37 @@ public class User extends BasicEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(nullable = false)
-    private String name;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @NotEmpty
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
-    private String email;
-
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
 
     @ManyToOne
     @JoinColumn(name = "group_id", nullable = false)
     private Group group;
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "users_articles",
+            name = "user_article",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id")
     )
     private List<Article> articles;
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public String getEmail() {
         return email;
@@ -50,14 +55,6 @@ public class User extends BasicEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getPassword() {
@@ -74,6 +71,22 @@ public class User extends BasicEntity implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public Group getGroup() {

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by ekaterina on 23.04.2017.
+ * @author Ekaterina Pyataeva on 23.04.2017.
  */
 
 @Entity
