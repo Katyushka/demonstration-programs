@@ -7,84 +7,106 @@
 <body>
 <div th:replace="fragments/header :: header">&nbsp;</div>
 <th:block layout:fragment="content">
-<div class="container">
-    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <div class="content">
+    <div class="container">
+        <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="content">
 
-            <h2>Создание нового пользователя</h2>
+                <h2>Создание нового пользователя</h2>
 
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="panel-title">Регистрация</div>
-                    <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="#" th:href="@{/login}">Логин</a></div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="panel-title">Регистрация</div>
+                        <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink"
+                                                                                                   href="#"
+                                                                                                   th:href="@{/login}">Логин</a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form name="form" id="signupform" th:action="@{/user/create}" action="/user/create"
+                              method="POST"
+                              class="form-horizontal" role="form" th:object="${form}" data-toggle="validator">
+                            <fieldset>
+
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                                </div>
+
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" class="col-md-3 control-label">Почта</label>
+                                    <div class="col-md-9">
+                                        <input id="email" type="text" class="form-control" name="email"
+                                               placeholder="Email"
+                                               th:field="*{email}" required="required"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="firstName" class="col-md-3 control-label">Имя</label>
+                                    <div class="col-md-9">
+                                        <input id="firstName" type="text" class="form-control" name="firstName"
+                                               placeholder="FirstName"
+                                               th:field="*{firstName}" required="required"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="lastName" class="col-md-3 control-label">Фамилия</label>
+                                    <div class="col-md-9">
+                                        <input id="lastName" type="text" class="form-control" name="lastName"
+                                               placeholder="LastName"
+                                               th:field="*{lastName}" required="required"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="userGroup" class="col-md-3 control-label">Группа: </label>
+                                    <div class="col-md-9">
+                                        <select th:field="*{group}" id="userGroup" class="form-control">
+                                            <option th:each="group : ${groups}" th:value="${group.id}"
+                                                    th:text="${group.name}"/>
+                                        </select>
+                                    </div>
+                                    <span th:errors="*{group}" style="color: red"/>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="password" class="col-md-3 control-label">Пароль</label>
+                                    <div class="col-md-9">
+                                        <input id="password" type="password" class="form-control" name="passwd"
+                                               placeholder="Password" th:field="*{password}" required="required"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-3 control-label">Подтвердите
+                                        пароль</label>
+                                    <div class="col-md-9">
+                                        <input id="password-confirm" type="password" class="form-control" name="passwd"
+                                               placeholder="Confirm password" th:field="*{passwordRepeated}"
+                                               required="required"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <input type="submit" value="    Зарегистрироваться" id="signup"
+                                               class="btn btn-info"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
-                <div class="panel-body" >
-                    <form name="form" id="signupform" th:action="@{/user/create}" action="/user/create" method="POST"
-                          class="form-horizontal" role="form" th:object="${form}" data-toggle="validator">
-                        <fieldset>
 
-                            <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
-                                <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
-                            </div>
-
-                            <div id="signupalert" style="display:none" class="alert alert-danger">
-                                <p>Error:</p>
-                                <span></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email" class="col-md-3 control-label">Почта</label>
-                                <div class="col-md-9">
-                                    <input id="email" type="text" class="form-control" name="email" placeholder="Email"
-                                           th:field="*{email}" required="required" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="firstName" class="col-md-3 control-label">Имя</label>
-                                <div class="col-md-9">
-                                    <input id="firstName" type="text" class="form-control" name="firstName" placeholder="FirstName"
-                                           th:field="*{firstName}" required="required" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="lastName" class="col-md-3 control-label">Фамилия</label>
-                                <div class="col-md-9">
-                                    <input id="lastName" type="text" class="form-control" name="lastName" placeholder="LastName"
-                                           th:field="*{lastName}" required="required" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password" class="col-md-3 control-label">Пароль</label>
-                                <div class="col-md-9">
-                                    <input id="password" type="password" class="form-control" name="passwd"
-                                           placeholder="Password" th:field="*{password}" required="required" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="password-confirm" class="col-md-3 control-label">Подтвердите пароль</label>
-                                <div class="col-md-9">
-                                    <input id="password-confirm" type="password" class="form-control" name="passwd"
-                                           placeholder="Confirm password" th:field="*{passwordRepeated}" required="required" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-offset-3 col-md-9">
-                                    <input type="submit" value="    Зарегистрироваться" id="signup" class="btn btn-info"/>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
             </div>
-
         </div>
     </div>
-</div>
-    </th:block>
+</th:block>
 </body>
 </html>

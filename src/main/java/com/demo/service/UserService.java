@@ -27,6 +27,9 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private GroupService groupService;
+
     public User getUserById(long id) {
         LOGGER.debug("Getting user ={}", id);
         return userRepository.findOne(id);
@@ -61,6 +64,9 @@ public class UserService {
         user.setEmail(form.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(form.getPassword()));
         user.setRole(Role.ROLE_USER);
+        user.setGroup(form.getGroup());
+        user.setFirstName(form.getFirstName());
+        user.setLastName(form.getLastName());
         return userRepository.save(user);
     }
 

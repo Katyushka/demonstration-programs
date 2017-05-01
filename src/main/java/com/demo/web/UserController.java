@@ -4,6 +4,7 @@ import com.demo.domain.CurrentUser;
 import com.demo.domain.User;
 import com.demo.domain.UserCreateForm;
 import com.demo.domain.validator.UserCreateFormValidator;
+import com.demo.service.GroupService;
 import com.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +43,9 @@ public class UserController extends AbstractController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private GroupService groupService;
+
 
     @InitBinder("form")
     public void initBinder(WebDataBinder binder) {
@@ -52,11 +56,14 @@ public class UserController extends AbstractController {
     public String getUserCreatePage(Model model) {
         LOGGER.debug("Getting user create form");
         model.addAttribute("form", new UserCreateForm());
+        model.addAttribute("user", new User());
+        model.addAttribute("groups", groupService.getAllGroups());
         return "userCreate";
     }
 
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
     public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
+
         LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {
             return "userCreate";
@@ -81,6 +88,7 @@ public class UserController extends AbstractController {
         LOGGER.debug("Getting users list");
         model.addAttribute("user", new User());
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("groups", groupService.getAllGroups());
         return "users";
     }
 

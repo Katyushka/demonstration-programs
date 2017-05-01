@@ -2,6 +2,8 @@ package com.demo.domain;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author Ekaterina Pyataeva on 24.04.2017.
  */
@@ -15,8 +17,8 @@ public class UserCreateForm {
     @NotEmpty
     private String lastName="";
 
-    @NotEmpty
-    private Long gruopId;
+    @NotNull
+    private Group group;
 
     @NotEmpty
     private String password="";
@@ -64,11 +66,11 @@ public class UserCreateForm {
         this.lastName = lastName;
     }
 
-    public Long getGruopId() {
-        return gruopId;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGruopId(Long gruopId) {
-        this.gruopId = gruopId;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
