@@ -4,6 +4,7 @@ import com.demo.domain.CurrentUser;
 import com.demo.domain.User;
 import com.demo.domain.UserCreateForm;
 import com.demo.domain.validator.UserCreateFormValidator;
+import com.demo.service.EmailService;
 import com.demo.service.GroupService;
 import com.demo.service.UserService;
 import org.slf4j.Logger;
@@ -46,6 +47,8 @@ public class UserController extends AbstractController {
     @Autowired
     private GroupService groupService;
 
+    @Autowired
+    private EmailService emailService;
 
     @InitBinder("form")
     public void initBinder(WebDataBinder binder) {
@@ -74,6 +77,7 @@ public class UserController extends AbstractController {
             Authentication auth =
                     new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
+            emailService.sendMail(currentUser.getUser().getEmail(), "Welcome!", "Thank you for registration :)");
         } catch (DataIntegrityViolationException e) {
             LOGGER.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
             bindingResult.reject("email.exists", "Email already exists");

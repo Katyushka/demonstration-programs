@@ -39,7 +39,9 @@ public class GroupController {
     private GroupCreateFormValidator groupCreateFormValidator;
 
     @InitBinder("form")
-    public void initBinder(WebDataBinder binder){binder.addValidators(groupCreateFormValidator);}
+    public void initBinder(WebDataBinder binder) {
+        binder.addValidators(groupCreateFormValidator);
+    }
 
 
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)

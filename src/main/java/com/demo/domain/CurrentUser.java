@@ -5,7 +5,7 @@ import org.springframework.security.core.authority.AuthorityUtils;
 /**
  * @author Ekaterina Pyataeva on 24.04.2017.
  */
-public class CurrentUser extends org.springframework.security.core.userdetails.User{
+public class CurrentUser extends org.springframework.security.core.userdetails.User {
     private User user;
 
     public CurrentUser(User user) {
@@ -13,15 +13,15 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
         this.user = user;
     }
 
-    public User getUser(){
+    public User getUser() {
         return user;
     }
 
-    public Long getId(){
+    public Long getId() {
         return user.getId();
     }
 
-    public Role getRole(){
+    public Role getRole() {
         return user.getRole();
     }
 }

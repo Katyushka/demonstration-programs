@@ -16,7 +16,7 @@ import org.springframework.validation.Validator;
  */
 
 @Component
-public class GroupCreateFormValidator implements Validator{
+public class GroupCreateFormValidator implements Validator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupCreateFormValidator.class);
 
@@ -32,6 +32,5 @@ public class GroupCreateFormValidator implements Validator{
     public void validate(Object target, Errors errors) {
         GroupCreateForm form = (GroupCreateForm) target;
     }
-
 
 }

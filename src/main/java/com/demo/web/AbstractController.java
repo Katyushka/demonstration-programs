@@ -17,7 +17,7 @@ public class AbstractController {
     protected UserService userService;
 
     @ModelAttribute("currentUser")
-    public User getCurrentUser(){
+    public User getCurrentUser() {
         return userService.getCurrentUser();
     }
 

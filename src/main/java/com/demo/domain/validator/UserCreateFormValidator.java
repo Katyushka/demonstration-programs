@@ -22,26 +22,26 @@ public class UserCreateFormValidator implements Validator {
     private UserService userService;
 
     @Override
-    public boolean supports(Class<?> clazz){
+    public boolean supports(Class<?> clazz) {
         return clazz.equals(UserCreateForm.class);
     }
 
     @Override
-    public void validate(Object target, Errors errors){
+    public void validate(Object target, Errors errors) {
         LOGGER.debug("Validating {}", target);
-        UserCreateForm form = (UserCreateForm)target;
+        UserCreateForm form = (UserCreateForm) target;
         validatePassword(errors, form);
         validateLogin(errors, form);
     }
 
     private void validateLogin(Errors errors, UserCreateForm form) {
-        if (userService.getUserByEmail(form.getEmail()) != null){
+        if (userService.getUserByEmail(form.getEmail()) != null) {
             errors.reject("User with this name already exist");
         }
     }
 
     private void validatePassword(Errors errors, UserCreateForm form) {
-        if (!form.getPassword().equals(form.getPasswordRepeated())){
+        if (!form.getPassword().equals(form.getPasswordRepeated())) {
             errors.reject("password.no_match", "Passwords do not match");
         }
     }

@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class SecurityHelper {
 
     public static User getCurrentUser() {
-        if (SecurityContextHolder.getContext().getAuthentication() == null){
+        if (SecurityContextHolder.getContext().getAuthentication() == null) {
             return null;
         }
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

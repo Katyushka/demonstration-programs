@@ -9,22 +9,22 @@ import javax.validation.constraints.NotNull;
  */
 public class UserCreateForm {
     @NotEmpty
-    private String email="";
+    private String email = "";
 
     @NotEmpty
-    private String firstName="";
+    private String firstName = "";
 
     @NotEmpty
-    private String lastName="";
+    private String lastName = "";
 
     @NotNull
     private Group group;
 
     @NotEmpty
-    private String password="";
+    private String password = "";
 
     @NotEmpty
-    private String passwordRepeated="";
+    private String passwordRepeated = "";
 
     public String getEmail() {
         return email;

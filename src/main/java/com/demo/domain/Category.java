@@ -35,4 +35,5 @@ public class Category extends BasicEntity implements Serializable {
     public void setArticles(List<Article> articles) {
         this.articles = articles;
     }
+
 }

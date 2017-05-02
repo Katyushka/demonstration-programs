@@ -2,15 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Language service</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-          href="../../css/bootstrap.min.css" />
+          href="../../css/bootstrap.min.css"/>
     <link rel="stylesheet" th:href="@{/css/font-awesome-4.0.3/css/font-awesome.css}"
-          href="../../css/font-awesome-4.0.3/css/font-awesome.css" />
+          href="../../css/font-awesome-4.0.3/css/font-awesome.css"/>
     <link rel="stylesheet" th:href="@{/css/jquery-ui-1.10.4.custom.css}"
-          href="../../css/jquery-ui-1.10.4.custom.css" />
+          href="../../css/jquery-ui-1.10.4.custom.css"/>
     <link rel="stylesheet" th:href="@{/css/common.css}"
-          href="../../css/common.css" />
+          href="../../css/common.css"/>
     <script th:src="@{/js/lib/jquery-1.10.2.js}" src="../../js/lib/jquery-1.10.2.js"/>
     <script th:src="@{/js/lib/jquery-ui-1.10.4.custom.js}" src="../../js/lib/jquery-ui-1.10.4.custom.js"/>
     <script th:src="@{/js/users.js}" src="../../js/users.js"/>
@@ -51,18 +51,20 @@
                         <td th:text="${user.firstName}">user firstName</td>
                         <td th:text="${user.lastName}">user lastName</td>
                         <td th:text="${user.group.name}">user group</td>
-                        <td><nobr>
-                            <button class="btn btn-primary"
-                                    onclick=""
-                                    th:onclick="'javascript:editUser(\'' + ${user.id} + '\');'">
-                                <i class="fa fa-pencil"></i> Редактировать
-                            </button>
-                            <a class="btn btn-primary"
-                               onclick="return confirm('Вы уверены, что хотите удалить выбранного пользователя?');"
-                               th:onclick="'javascript:deleteUser(\'' + ${user.id} + '\');'">
-                                <i class="fa fa-times"></i>Удалить
-                            </a>
-                        </nobr></td>
+                        <td>
+                            <nobr>
+                                <button class="btn btn-primary"
+                                        onclick=""
+                                        th:onclick="'javascript:editUser(\'' + ${user.id} + '\');'">
+                                    <i class="fa fa-pencil"></i> Редактировать
+                                </button>
+                                <a class="btn btn-primary"
+                                   onclick="return confirm('Вы уверены, что хотите удалить выбранного пользователя?');"
+                                   th:onclick="'javascript:deleteUser(\'' + ${user.id} + '\');'">
+                                    <i class="fa fa-times"></i>Удалить
+                                </a>
+                            </nobr>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

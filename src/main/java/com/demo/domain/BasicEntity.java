@@ -39,7 +39,6 @@ public class BasicEntity implements Serializable {
         return Objects.hash(getId());
     }
 
-
 }
 
 

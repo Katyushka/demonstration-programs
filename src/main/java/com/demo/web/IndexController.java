@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 
 @Controller
-public class IndexController extends AbstractController{
+public class IndexController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
 
     @RequestMapping("/")

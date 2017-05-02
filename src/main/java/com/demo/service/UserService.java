@@ -36,9 +36,9 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public User getCurrentUser(){
+    public User getCurrentUser() {
         User user = SecurityHelper.getCurrentUser();
-        if (user == null){
+        if (user == null) {
             return null;
         }
         return getUserById(user.getId());
@@ -52,7 +52,7 @@ public class UserService {
     public List<User> getAllUsers() {
         LOGGER.debug("Getting all users");
         List<User> users = new ArrayList<>();
-        for (User user:userRepository.findAll()){
+        for (User user : userRepository.findAll()) {
             users.add(user);
         }
         return users;
@@ -72,7 +72,7 @@ public class UserService {
 
     public User save(User user) {
         LOGGER.debug("Saving user");
-        if (user.getId() == null){
+        if (user.getId() == null) {
             user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         }
         return userRepository.save(user);

@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
-          href="../../css/bootstrap.min.css" />
+          href="../../css/bootstrap.min.css"/>
     <link rel="stylesheet" th:href="@{/css/style.css}"
-          href="../../css/style.css" />
+          href="../../css/style.css"/>
 </head>
 <body>
 
@@ -20,7 +20,8 @@
                 <ul class="nav navbar-nav">
                     <!--<li ><a th:href="@{/}" href="home.html"> Основная страница </a></li>-->
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/}" href="#"> О программе </a></li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/users}" href="/users"> Пользователи </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/users}" href="/users"> Пользователи </a>
+                    </li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/groups}" href="/groups"> Группы </a></li>
 
                     <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Войти </a></li>
