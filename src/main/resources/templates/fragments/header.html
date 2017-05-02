@@ -18,11 +18,13 @@
             </div>
             <div id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <!--<li ><a th:href="@{/}" href="home.html"> Основная страница </a></li>-->
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/}" href="#"> О программе </a></li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/users}" href="/users"> Пользователи </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/users}" href="/users"> Пользователи </a>
+                    </li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/groups}" href="/groups"> Группы </a></li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}" href="/categories"> Категории </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}" href="/categories">
+                        Категории </a></li>
+                    <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/profile}" href="/profile"> Профиль </a></li>
                     <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Войти </a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" href="logout"> Выйти </a></li>
                 </ul>
@@ -30,5 +32,11 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="navbar navbar-inverse navbar-fixed-left">
+</div>
+
 </body>
 </html>

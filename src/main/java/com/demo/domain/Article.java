@@ -15,6 +15,9 @@ public class Article extends BasicEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -58,5 +61,13 @@ public class Article extends BasicEntity implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
