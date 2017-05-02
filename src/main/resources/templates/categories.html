@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category service</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+          href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/font-awesome-4.0.3/css/font-awesome.css}"
+          href="../../css/font-awesome-4.0.3/css/font-awesome.css"/>
+    <link rel="stylesheet" th:href="@{/css/jquery-ui-1.10.4.custom.css}"
+          href="../../css/jquery-ui-1.10.4.custom.css"/>
+    <link rel="stylesheet" th:href="@{/css/common.css}"
+          href="../../css/common.css"/>
+    <script th:src="@{/js/lib/jquery-1.10.2.js}" src="../../js/lib/jquery-1.10.2.js"/>
+    <script th:src="@{/js/lib/jquery-ui-1.10.4.custom.js}" src="../../js/lib/jquery-ui-1.10.4.custom.js"/>
+    <script th:src="@{/js/categories.js}" src="../../js/categories.js"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header">&nbsp;</div>
+
+<div class="container">
+    <div style="width: 95%; margin: 0 auto;">
+        <div id="categoryDialog" style="display: none;">
+            <div th:replace="categoryForm :: categoryForm">&nbsp;</div>
+        </div>
+        <div id="dialog-confirm" title="Удалить?" style="display: none;">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0; "></span>
+                Удалить выбранную категорию?</p>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel-heading"><h2>Список категорий</h2></div>
+            <div class="panel-body">
+                <button type="button" class="btn btn-primary" onclick="addCategory()" style="margin-bottom: 10px;">
+                    <i class="fa fa-plus"></i> Добавить категорию
+                </button>
+                <br/>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th width="20%">Название</th>
+                        <th width="20%">Действие</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="category : ${categories}" th:id="'category-' + ${category.id}">
+                        <td th:text="${category.name}">Название категории</td>
+                        <td>
+                            <nobr>
+                                <button class="btn btn-primary"
+                                        onclick=""
+                                        th:onclick="'javascript:editCategory(\'' + ${category.id} + '\');'">
+                                    <i class="fa fa-pencil"></i> Редактировать
+                                </button>
+
+                                <a class="btn btn-primary"
+                                   onclick="return confirm('Вы уверены, что хотите удалить выбранную категорию?');"
+                                   th:onclick="'javascript:deleteCategory(\'' + ${category.id} + '\');'">
+                                    <i class="fa fa-times"></i>Удалить
+                                </a>
+
+                            </nobr>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

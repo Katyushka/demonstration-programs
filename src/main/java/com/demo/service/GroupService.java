@@ -20,7 +20,7 @@ import java.util.List;
 @Service
 @Transactional
 public class GroupService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GroupService.class);
 
     @Autowired
     private GroupRepository groupRepository;
