@@ -2,7 +2,6 @@ package com.demo.web;
 
 import com.demo.domain.CurrentUser;
 import com.demo.domain.User;
-import com.demo.domain.UserCreateForm;
 import com.demo.domain.validator.UserCreateFormValidator;
 import com.demo.service.EmailService;
 import com.demo.service.GroupService;
@@ -58,14 +57,13 @@ public class UserController extends AbstractController {
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)
     public String getUserCreatePage(Model model) {
         LOGGER.debug("Getting user create form");
-        model.addAttribute("form", new UserCreateForm());
-        model.addAttribute("user", new User());
+        model.addAttribute("form", new User());
         model.addAttribute("groups", groupService.getAllGroups());
         return "userCreate";
     }
 
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
-    public String handleUserCreateForm(@Valid @ModelAttribute("form") UserCreateForm form, BindingResult bindingResult) {
+    public String handleUserCreateForm(@Valid @ModelAttribute("form") User form, BindingResult bindingResult) {
 
         LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
         if (bindingResult.hasErrors()) {

@@ -1,13 +1,12 @@
 package com.demo.domain.validator;
 
 
-import com.demo.domain.ArticleCreateForm;
+import com.demo.domain.Article;
 import com.demo.service.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -25,12 +24,12 @@ public class ArticleCreateFormValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz.equals(ArticleCreateForm.class);
+        return clazz.equals(Article.class);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        ArticleCreateForm form = (ArticleCreateForm) target;
+        Article form = (Article) target;
     }
 
 }

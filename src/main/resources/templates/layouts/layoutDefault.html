@@ -13,10 +13,11 @@
           href="../../css/style.css"/>
     <title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">Demo</title>
 
-    <link rel="stylesheet" th:href="@{/css/lib/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/lib/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
     <link rel="stylesheet" th:href="@{/css/lib/bootstrap-select.css}"/>
     <link rel="stylesheet" th:href="@{/css/lib/fileinput.css}"/>
+    <link rel="stylesheet" th:href="@{/css/lib/bootstrap-multiselect.css}"/>
 
     <script th:inline="javascript">
         // @formatter:off
@@ -36,14 +37,16 @@
 <div layout:fragment="pageModal"></div>
 <header>
     <div th:replace="fragments/navigation :: navigation"/>
+    <script type="text/javascript" th:src="@{/js/lib/jquery-3.2.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lib/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lib/bootstrap-select.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lib/fileinput.js}"></script>
+    <script type="text/javascript" th:src="@{/js/lib/bootstrap-multiselect.js}"></script>
 </header>
 <main>
     <div layout:fragment="content"/>
 </main>
-<script type="text/javascript" th:src="@{/js/lib/jquery-3.1.1.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/bootstrap.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/bootstrap-select.js}"></script>
-<script type="text/javascript" th:src="@{/js/lib/fileinput.js}"></script>
+
 <div layout:fragment="pageScript"/>
 </body>
 </html>

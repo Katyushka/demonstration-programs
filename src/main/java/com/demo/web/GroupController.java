@@ -2,7 +2,6 @@ package com.demo.web;
 
 import com.demo.domain.CurrentGroup;
 import com.demo.domain.Group;
-import com.demo.domain.GroupCreateForm;
 import com.demo.domain.validator.GroupCreateFormValidator;
 import com.demo.service.GroupService;
 import org.slf4j.Logger;
@@ -47,12 +46,12 @@ public class GroupController {
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)
     public String getGroupCreatePage(Model model) {
         LOGGER.debug("Getting group create form");
-        model.addAttribute("form", new GroupCreateForm());
+        model.addAttribute("form", new Group());
         return "groupCreate";
     }
 
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
-    public String handleGroupCreateForm(@Valid @ModelAttribute("form") GroupCreateForm form, BindingResult bindingResult) {
+    public String handleGroupCreateForm(@Valid @ModelAttribute("form") Group form, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "groupCreate";

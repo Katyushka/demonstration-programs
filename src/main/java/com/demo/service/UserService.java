@@ -2,7 +2,6 @@ package com.demo.service;
 
 import com.demo.domain.Role;
 import com.demo.domain.User;
-import com.demo.domain.UserCreateForm;
 import com.demo.repository.UserRepository;
 import com.demo.util.SecurityHelper;
 import org.slf4j.Logger;
@@ -58,7 +57,7 @@ public class UserService {
         return users;
     }
 
-    public User create(UserCreateForm form) {
+    public User create(User form) {
         LOGGER.debug("Creating new user");
         User user = new User();
         user.setEmail(form.getEmail());

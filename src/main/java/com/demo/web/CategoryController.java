@@ -1,7 +1,6 @@
 package com.demo.web;
 
 import com.demo.domain.Category;
-import com.demo.domain.CategoryCreateForm;
 import com.demo.domain.CurrentCategory;
 import com.demo.domain.validator.CategoryCreateFormValidator;
 import com.demo.service.CategoryService;
@@ -48,12 +47,12 @@ public class CategoryController {
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)
     public String getCategoryCreatePage(Model model) {
         LOGGER.debug("Getting category create form");
-        model.addAttribute("form", new CategoryCreateForm());
+        model.addAttribute("form", new Category());
         return "categoryCreate";
     }
 
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
-    public String handleCategoryCreateForm(@Valid @ModelAttribute("form") CategoryCreateForm form, BindingResult bindingResult) {
+    public String handleCategoryCreateForm(@Valid @ModelAttribute("form") Category form, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "categoryCreate";

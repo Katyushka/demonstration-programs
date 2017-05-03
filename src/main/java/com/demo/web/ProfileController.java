@@ -1,17 +1,14 @@
 package com.demo.web;
 
 import com.demo.domain.Article;
-import com.demo.domain.ArticleCreateForm;
-import com.demo.domain.Group;
+import com.demo.domain.User;
 import com.demo.domain.validator.ArticleCreateFormValidator;
 import com.demo.service.ArticleService;
 import com.demo.service.CategoryService;
-import com.demo.service.GroupService;
 import com.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * @author Ekaterina Pyataeva on 02.05.2017.
@@ -48,7 +46,7 @@ public class ProfileController extends AbstractController {
     private ArticleService articleService;
 
     @Autowired
-    private GroupService groupService;
+    private UserService userService;
 
     @Autowired
     private ArticleCreateFormValidator articleCreateFormValidator;
@@ -62,14 +60,17 @@ public class ProfileController extends AbstractController {
     @RequestMapping(value = PATH_ROOT, method = RequestMethod.GET)
     public String getArticleCreatePage(Model model) {
         LOGGER.debug("Getting article create form");
-        model.addAttribute("form", new ArticleCreateForm());
+        model.addAttribute("form", new Article());
         model.addAttribute("categories", categoryService.getAllCategories());
+        List<User> users = userService.getAllUsers();
+        users.remove(userService.getCurrentUser());
+        model.addAttribute("users", users);
         return "profile";
     }
 
 
-    @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
-    public String handleArticleCreateForm(@Valid @ModelAttribute("form") ArticleCreateForm form, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
+    @RequestMapping(value = PATH_ROOT, method = RequestMethod.POST)
+    public String handleArticleCreateForm(@Valid @ModelAttribute("form") Article form, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
 
         byte[] bytes = new byte[0];
         try {
@@ -77,18 +78,13 @@ public class ProfileController extends AbstractController {
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
             Files.write(path, bytes);
             form.setContent(bytes);
-            try {
-                Article article = articleService.create(form);
-            } catch (DataIntegrityViolationException e) {
-                LOGGER.warn("Exception occurred when trying to save the article", e);
-                return "profile";
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
+        Article article = articleService.create(form);
+        articleService.save(article);
         if (bindingResult.hasErrors()) {
             return "profile";
         }

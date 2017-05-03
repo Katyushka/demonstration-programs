@@ -1,7 +1,6 @@
 package com.demo.service;
 
 import com.demo.domain.Category;
-import com.demo.domain.CategoryCreateForm;
 import com.demo.repository.CategoryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +35,8 @@ public class CategoryService {
         return categoryRepository.findOne(id);
     }
 
-    public Category create(CategoryCreateForm form){
-        Category category = new Category();
-        category.setName(form.getName());
-        return categoryRepository.save(category);
+    public Category create(Category form){
+        return categoryRepository.save(form);
     }
 
     public Category save(Category category){

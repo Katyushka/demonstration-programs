@@ -49,6 +49,10 @@ public class User extends BasicEntity implements Serializable {
     private List<Article> articles;
 
 
+    @Transient
+    private String passwordRepeated;
+
+
     public String getEmail() {
         return email;
     }
@@ -103,5 +107,13 @@ public class User extends BasicEntity implements Serializable {
 
     public void setArticles(List<Article> articles) {
         this.articles = articles;
+    }
+
+    public String getPasswordRepeated() {
+        return passwordRepeated;
+    }
+
+    public void setPasswordRepeated(String passwordRepeated) {
+        this.passwordRepeated = passwordRepeated;
     }
 }

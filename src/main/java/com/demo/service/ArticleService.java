@@ -1,7 +1,6 @@
 package com.demo.service;
 
 import com.demo.domain.Article;
-import com.demo.domain.ArticleCreateForm;
 import com.demo.domain.User;
 import com.demo.repository.ArticleRepository;
 import org.slf4j.Logger;
@@ -30,40 +29,34 @@ public class ArticleService {
     private UserService userService;
 
 
-    public List<Article> getAllArticles(){
+    public List<Article> getAllArticles() {
         List<Article> articles = new ArrayList<>();
         articles.addAll(articleRepository.findAll());
         return articles;
     }
 
-    public List<Article> getArticlesByCategoryId(Long categoryId){
+    public List<Article> getArticlesByCategoryId(Long categoryId) {
         List<Article> articles = new ArrayList<>();
         articles.addAll(articleRepository.findByCategoryId(categoryId));
         return articles;
     }
 
-    public Article getArticleById(Long id){
+    public Article getArticleById(Long id) {
         return articleRepository.findOne(id);
     }
 
-    public Article create(ArticleCreateForm form){
-        List<User> users = new ArrayList<>();
+    public Article create(Article form) {
+        List<User> users = form.getUsers();
         users.add(userService.getCurrentUser());
-        Article article = new Article();
-        article.setName(form.getName());
-        article.setDescription(form.getDescription());
-        article.setCategory(form.getCategory());
-        article.setUsers(users);
-        article.setContent(form.getContent());
+        form.setUsers(users);
+        return articleRepository.save(form);
+    }
 
+    public Article save(Article article) {
         return articleRepository.save(article);
     }
 
-    public Article save(Article article){
-        return articleRepository.save(article);
-    }
-
-    public void delete(Article article){
+    public void delete(Article article) {
         articleRepository.delete(article);
     }
 

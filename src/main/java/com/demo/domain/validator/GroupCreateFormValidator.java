@@ -1,6 +1,6 @@
 package com.demo.domain.validator;
 
-import com.demo.domain.GroupCreateForm;
+import com.demo.domain.Group;
 import com.demo.service.GroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +24,12 @@ public class GroupCreateFormValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz.equals(GroupCreateForm.class);
+        return clazz.equals(Group.class);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        GroupCreateForm form = (GroupCreateForm) target;
+        Group form = (Group) target;
     }
 
 }

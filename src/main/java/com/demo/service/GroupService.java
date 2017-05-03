@@ -1,7 +1,6 @@
 package com.demo.service;
 
 import com.demo.domain.Group;
-import com.demo.domain.GroupCreateForm;
 import com.demo.repository.GroupRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,10 +36,8 @@ public class GroupService {
         return groupRepository.findOne(id);
     }
 
-    public Group create(GroupCreateForm form){
-        Group group = new Group();
-        group.setName(form.getName());
-        return groupRepository.save(group);
+    public Group create(Group form){
+        return groupRepository.save(form);
     }
 
     public Group save(Group group){

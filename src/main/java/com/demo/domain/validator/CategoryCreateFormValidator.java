@@ -1,6 +1,6 @@
 package com.demo.domain.validator;
 
-import com.demo.domain.CategoryCreateForm;
+import com.demo.domain.Category;
 import com.demo.service.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +24,12 @@ public class CategoryCreateFormValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return clazz.equals(CategoryCreateForm.class);
+        return clazz.equals(Category.class);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
-        CategoryCreateForm form = (CategoryCreateForm) target;
+        Category form = (Category) target;
     }
 
 
