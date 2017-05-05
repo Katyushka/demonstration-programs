@@ -18,6 +18,22 @@
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/groups}" href="/groups"> Группы </a></li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}" href="/categories"> Категории </a></li>
                     <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/profile}" href="/profile"> Профиль </a></li>
+
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{/articlesList}" href="/articlesList">Категории <b class="caret"></b></a>
+                        <ul role="menu" class="dropdown-menu">
+                            <li th:each="category : ${categories}" ><a href="/articlesList" th:href="@{/articlesList}" th:text="${category.name}"></a>
+                            </li>
+                        </ul>
+
+
+                    </li>
+
+
+
+
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
                     <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Войти </a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" href="logout"> Выйти </a></li>
                 </ul>

@@ -28,6 +28,9 @@
                     <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Войти </a></li>
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" href="logout"> Выйти </a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li sec:authorize="isAnonymous()"><a th:href="@{/login}" href="login"> Войти </a></li>
+                </ul>
             </div>
         </div>
     </div>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Articles list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"
+          href="../../css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/font-awesome-4.0.3/css/font-awesome.css}"
+          href="../../css/font-awesome-4.0.3/css/font-awesome.css"/>
+    <link rel="stylesheet" th:href="@{/css/jquery-ui-1.10.4.custom.css}"
+          href="../../css/jquery-ui-1.10.4.custom.css"/>
+    <link rel="stylesheet" th:href="@{/css/common.css}"
+          href="../../css/common.css"/>
+    <script th:src="@{/js/lib/jquery-1.10.2.js}" src="../../js/lib/jquery-1.10.2.js"/>
+    <script th:src="@{/js/lib/jquery-ui-1.10.4.custom.js}" src="../../js/lib/jquery-ui-1.10.4.custom.js"/>
+    <script th:src="@{/js/users.js}" src="../../js/users.js"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div class="container">
+    <div>
+
+            <div style="font-size: 16pt;">
+                <div th:each="article : ${articles}" ><a href="/articlesList" th:href="@{/articlesList}" th:text="${article.name} + ', ' + ${article.description}"></a></div>
+
+            </div>
+
+
+
+
+    </div>
+
+</div>
+</body>
+</html>
