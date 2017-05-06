@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fonts/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/user/create").permitAll()
+                .antMatchers("/articlesList/**").permitAll()
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin()

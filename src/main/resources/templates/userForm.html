@@ -4,12 +4,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div class="container">
+<div>
     <div th:fragment="userForm">
         <form id="userForm" th:object="${user}" method="post" data-toggle="validator"
               action="#" th:action="@{/users/save}" class="pure-form pure-form-aligned" role="form">
 
-            <fieldset>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                     <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
                 </div>
@@ -51,7 +50,7 @@
                 </div>
                 <input id="id" type="hidden" th:field="*{id}" class="form-control"/>
 
-            </fieldset>
+
         </form>
     </div>
 </div>

@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html layout:decorator="layouts/layoutDefault" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>Articles list</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -16,19 +17,28 @@
     <script th:src="@{/js/users.js}" src="../../js/users.js"/>
 </head>
 <body>
-<div th:replace="fragments/header :: header">&nbsp;</div>
+<form th:action="@{/articlesList}" th:object="${model}" th:method="post">
+    <div th:replace="fragments/header :: header">&nbsp;
+    </div>
+</form>
 <div class="container">
-    <div>
 
-            <div style="font-size: 16pt;">
-                <div th:each="article : ${articles}" ><a href="/articlesList" th:href="@{/articlesList}" th:text="${article.name} + ', ' + ${article.description}"></a></div>
 
+    <th:block layout:fragment="content">
+
+        <div style="font-size: 16pt; margin: 50px">
+            <div th:each="article : ${articles}">
+
+                <a href="#" th:href="@{/}">
+                    <span th:text="${article.name}"></span>
+                    <span th:each="user : ${article.users}" th:text="${user.firstName} + ' ' + ${user.lastName} "></span>
+                </a>
             </div>
 
+        </div>
 
 
-
-    </div>
+    </th:block>
 
 </div>
 </body>

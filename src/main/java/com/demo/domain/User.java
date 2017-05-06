@@ -40,12 +40,7 @@ public class User extends BasicEntity implements Serializable {
     private Group group;
 
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "user_article",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id")
-    )
+    @ManyToMany(mappedBy = "users")
     private List<Article> articles;
 
 

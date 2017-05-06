@@ -34,7 +34,7 @@ public class UserController extends AbstractController {
     protected static final String PATH_ROOT = "/users";
     protected static final String PATH_CREATE = "/user/create";
     protected static final String PATH_SAVE = "/users/save";
-    protected static final String PATH_GET = "users/get/{userId}";
+    protected static final String PATH_GET = "/users/get/{userId}";
     protected static final String PATH_DELETE = "/users/delete/{userId}";
 
     @Autowired

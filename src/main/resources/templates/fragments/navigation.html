@@ -20,13 +20,11 @@
                     <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/profile}" href="/profile"> Профиль </a></li>
 
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{/articlesList}" href="/articlesList">Категории <b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{/}" href="#">Категории <b class="caret"></b></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li th:each="category : ${categories}" ><a href="/articlesList" th:href="@{/articlesList}" th:text="${category.name}"></a>
+                            <li th:each="category : ${categories}" ><a th:href="@{/articlesList/{categoryId}(categoryId=${category.id})}" th:text="${category.name}"></a>
                             </li>
                         </ul>
-
-
                     </li>
 
 

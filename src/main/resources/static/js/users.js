@@ -9,7 +9,7 @@ function addUser() {
 function editUser(id) {
 
     $.get("/users/get/" + id, function (result) {
-
+        resetDialog($('#userForm'));
         $("#userDialog").html(result);
 
         $('#userDialog').dialog("option", "title", 'Редактировать?');
@@ -50,28 +50,28 @@ function resetDialog(form) {
 
 $(document).ready(function () {
 
-    $('#userDialog').dialog({
+        $('#userDialog').dialog({
 
-        autoOpen: false,
-        position: 'center',
-        modal: true,
-        resizable: false,
-        width: 440,
-        buttons: {
-            "Сохранить": function () {
-                $('#userForm').submit();
+            autoOpen: false,
+            position: 'center',
+            modal: true,
+            resizable: false,
+            width: 440,
+            buttons: {
+                "Сохранить": function () {
+                    $('#userForm').submit();
+                },
+                "Отменить": function () {
+                    $(this).dialog('close');
+                }
             },
-            "Отменить": function () {
+            close: function () {
+
+                resetDialog($('#userForm'));
+
                 $(this).dialog('close');
             }
-        },
-        close: function () {
-
-            resetDialog($('#userForm'));
-
-            $(this).dialog('close');
-        }
-    });
+        });
 });
 
 $(function () {

@@ -23,8 +23,14 @@ public class Article extends BasicEntity implements Serializable {
     @Column(nullable = false)
     private byte[] content;
 
-    @ManyToMany(mappedBy = "articles")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_article",
+            joinColumns = @JoinColumn(name = "article_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
     private List<User> users;
+
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
