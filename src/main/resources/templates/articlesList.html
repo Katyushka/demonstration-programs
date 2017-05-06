@@ -14,7 +14,7 @@
           href="../../css/common.css"/>
     <script th:src="@{/js/lib/jquery-1.10.2.js}" src="../../js/lib/jquery-1.10.2.js"/>
     <script th:src="@{/js/lib/jquery-ui-1.10.4.custom.js}" src="../../js/lib/jquery-ui-1.10.4.custom.js"/>
-    <script th:src="@{/js/users.js}" src="../../js/users.js"/>
+
 </head>
 <body>
 <form th:action="@{/articlesList}" th:object="${model}" th:method="post">
@@ -29,7 +29,7 @@
         <div style="font-size: 16pt; margin: 50px">
             <div th:each="article : ${articles}">
 
-                <a href="#" th:href="@{/}">
+                <a href="#" th:href="@{/article/{articleId}(articleId=${article.id})}">
                     <span th:text="${article.name}"></span>
                     <span th:each="user : ${article.users}" th:text="${user.firstName} + ' ' + ${user.lastName} "></span>
                 </a>
