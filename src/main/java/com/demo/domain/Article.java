@@ -18,6 +18,12 @@ public class Article extends BasicEntity implements Serializable {
     private String name;
 
     @Column(nullable = false)
+    private String mimeType;
+
+    @Column(nullable = false)
+    private String fileName;
+
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -75,5 +81,21 @@ public class Article extends BasicEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

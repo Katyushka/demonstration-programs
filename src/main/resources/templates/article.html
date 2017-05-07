@@ -12,14 +12,6 @@
 <div class="container">
     <th:block layout:fragment="content">
 
-        <div style="font-size: 16pt; margin: 50px">
-            <span>Название: </span>
-            <span th:text="${article.name}"></span>
-            <span>Описание: </span>
-            <span th:text="${article.description}"></span>
-
-
-        </div>
 
         <div style="width: 95%; margin: 0 auto;">
             <table class="table table-hover table-bordered">
@@ -32,7 +24,11 @@
                     <td>Описание:</td>
                     <td th:text="${article.description}"></td>
                 </tr>
-
+                <tr>
+                    <td>Скачать:</td>
+                    <td><a th:href="@{/article/download/{articleId}(articleId=${article.id})}"
+                           target="_blank">Загрузить</a></td>
+                </tr>
                 </tbody>
             </table>
 

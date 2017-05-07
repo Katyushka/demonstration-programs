@@ -74,11 +74,14 @@ public class ProfileController extends AbstractController {
 
         byte[] bytes = new byte[0];
         try {
-            bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            Files.write(path, bytes);
-            form.setContent(bytes);
-
+            if (!file.isEmpty()) {
+                bytes = file.getBytes();
+                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+                Files.write(path, bytes);
+                form.setContent(bytes);
+                form.setMimeType(file.getContentType());
+                form.setFileName(file.getOriginalFilename());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,7 +91,6 @@ public class ProfileController extends AbstractController {
         if (bindingResult.hasErrors()) {
             return "profile";
         }
-
         return "profile";
     }
 

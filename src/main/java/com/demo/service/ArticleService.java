@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author Ekaterina Pyataeva on 02.05.2017.
@@ -44,6 +45,8 @@ public class ArticleService {
     public Article getArticleById(Long id) {
         return articleRepository.findOne(id);
     }
+
+
 
     public Article create(Article form) {
         List<User> users = form.getUsers();
