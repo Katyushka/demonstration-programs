@@ -74,7 +74,6 @@ public class CategoryController {
     public String getCategories(Model model) {
         LOGGER.debug("Getting categories list");
         model.addAttribute("category", new Category());
-        model.addAttribute("categories", categoryService.getAllCategories());
         return "categories";
     }
 

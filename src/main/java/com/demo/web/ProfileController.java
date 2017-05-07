@@ -4,7 +4,6 @@ import com.demo.domain.Article;
 import com.demo.domain.User;
 import com.demo.domain.validator.ArticleCreateFormValidator;
 import com.demo.service.ArticleService;
-import com.demo.service.CategoryService;
 import com.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +38,6 @@ public class ProfileController extends AbstractController {
 
     private static String UPLOADED_FOLDER = "E://osu//5_kurs//files//";
 
-    @Autowired
-    private CategoryService categoryService;
 
     @Autowired
     private ArticleService articleService;
@@ -61,7 +58,6 @@ public class ProfileController extends AbstractController {
     public String getArticleCreatePage(Model model) {
         LOGGER.debug("Getting article create form");
         model.addAttribute("form", new Article());
-        model.addAttribute("categories", categoryService.getAllCategories());
         List<User> users = userService.getAllUsers();
         users.remove(userService.getCurrentUser());
         model.addAttribute("users", users);
