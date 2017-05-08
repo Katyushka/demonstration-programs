@@ -9,6 +9,7 @@ import com.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.Lifecycle;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Ekaterina Pyataeva on 24.04.2017.
@@ -32,9 +35,9 @@ public class UserController extends AbstractController {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     protected static final String PATH_ROOT = "/users";
-    protected static final String PATH_CREATE = "/user/create";
+    protected static final String PATH_CREATE = "/users/create";
     protected static final String PATH_SAVE = "/users/save";
-    protected static final String PATH_GET = "/users/get/{userId}";
+    protected static final String PATH_EDIT = "/users/edit/{userId}";
     protected static final String PATH_DELETE = "/users/delete/{userId}";
 
     @Autowired
@@ -63,28 +66,37 @@ public class UserController extends AbstractController {
     }
 
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
-    public String handleUserCreateForm(@Valid @ModelAttribute("form") User form, BindingResult bindingResult) {
+    public String handleUserCreateForm(@Valid @ModelAttribute("form") User user, BindingResult bindingResult) {
+        List<User> users = userService.getAllUsers();
+        Optional<User> userOptional = users.stream().filter(userFromRepo -> userFromRepo.getId().equals(user.getId())).findFirst();
+        if (userOptional.isPresent()) {
+            userService.save(user);
+            return "redirect:/users";
 
-        LOGGER.debug("Processing user create form={}, bindingResult={}", form, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "userCreate";
-        }
-        try {
-            User user = userService.create(form);
-            CurrentUser currentUser = new CurrentUser(user);
-            Authentication auth =
-                    new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(auth);
-            emailService.sendMail(currentUser.getUser().getEmail(), "Welcome!", "Thank you for registration :)");
-        } catch (DataIntegrityViolationException e) {
-            LOGGER.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
-            bindingResult.reject("email.exists", "Email already exists");
-            return "userCreate";
+        } else {
+            LOGGER.debug("Processing user create form={}, bindingResult={}", user, bindingResult);
+            if (bindingResult.hasErrors()) {
+                return "userEdit";
+            }
+
+
+            try {
+                User user1 = userService.create(user);
+                CurrentUser currentUser = new CurrentUser(user1);
+                Authentication auth =
+                        new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(auth);
+                emailService.sendMail(currentUser.getUser().getEmail(), "Welcome!", "Thank you for registration :)");
+            } catch (DataIntegrityViolationException e) {
+                LOGGER.warn("Exception occurred when trying to save the user, assuming duplicate email", e);
+                bindingResult.reject("email.exists", "Email already exists");
+                return "userEdit";
+            }
         }
         return "redirect:/";
     }
 
-    @RequestMapping(PATH_ROOT)
+    @RequestMapping(value = PATH_ROOT, method = RequestMethod.GET)
     @Secured("ROLE_ADMIN")
     public String getUsers(Model model) {
         LOGGER.debug("Getting users list");
@@ -105,15 +117,15 @@ public class UserController extends AbstractController {
         return "redirect:/users";
     }
 
-    @RequestMapping(PATH_GET)
+    @RequestMapping(PATH_EDIT)
     @Secured("ROLE_ADMIN")
     public String getUser(@PathVariable("userId") Long userId, Model model) {
         LOGGER.debug("Getting get user action" + userId);
         User user = userService.getUserById(userId);
-        model.addAttribute("user", user);
+        model.addAttribute("form", user);
         model.addAttribute("groups", groupService.getAllGroups());
         model.addAttribute("password", "invisible");
-        return "userForm";
+        return "userEdit";
     }
 
     @RequestMapping(value = PATH_DELETE, method = RequestMethod.POST)

@@ -21,7 +21,7 @@ public class ArticleUtils {
     public static HttpHeaders setHeaders(HttpHeaders headers, String mediaType, String fileName) {
 
         headers.setContentType(MediaType.parseMediaType(mediaType));
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"");
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=" + fileName);
         return headers;
     }
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
@@ -22,19 +23,16 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping(value = "/article")
 public class ArticleController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ArticleController.class);
-
-    protected static final String PATH_ROOT = "/article";
-    protected static final String PATH_GET = "article/{articleId}";
-    protected static final String PATH_DOWNLOAD = "article/download/{articleId}";
 
     @Autowired
     private ArticleService articleService;
 
 
-    @RequestMapping(PATH_GET)
+    @RequestMapping(value = "/{articleId}")
     public String getArticleById(@PathVariable("articleId") Long articleId, Model model) {
         LOGGER.debug("Getting get articles action " + articleId);
         Article article = articleService.getArticleById(articleId);
@@ -43,7 +41,7 @@ public class ArticleController extends AbstractController {
     }
 
 
-    @RequestMapping(PATH_DOWNLOAD)
+    @RequestMapping(value = "/download/{articleId}")
     public ResponseEntity<byte[]> getFile(@PathVariable("articleId") Long articleId, Model model) {
         HttpHeaders headers = new HttpHeaders();
         Article article = articleService.getArticleById(articleId);

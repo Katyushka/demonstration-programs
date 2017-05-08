@@ -11,7 +11,7 @@
         <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
             <div class="content">
 
-                <h2>Создание нового пользователя</h2>
+                <h2>Изменения пользователя</h2>
 
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -37,7 +37,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Почта</label>
+                                    <label for="email" class="col-md-3 control-label">Почта:</label>
                                     <div class="col-md-9">
                                         <input id="email" type="text" class="form-control" name="email"
                                                placeholder="Email"
@@ -46,7 +46,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="firstName" class="col-md-3 control-label">Имя</label>
+                                    <label for="firstName" class="col-md-3 control-label">Имя:</label>
                                     <div class="col-md-9">
                                         <input id="firstName" type="text" class="form-control" name="firstName"
                                                placeholder="FirstName"
@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="lastName" class="col-md-3 control-label">Фамилия</label>
+                                    <label for="lastName" class="col-md-3 control-label">Фамилия:</label>
                                     <div class="col-md-9">
                                         <input id="lastName" type="text" class="form-control" name="lastName"
                                                placeholder="LastName"
@@ -76,29 +76,29 @@
 
 
                                 <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Пароль</label>
                                     <div class="col-md-9">
-                                        <input id="password" type="password" class="form-control" name="passwd"
+                                        <input id="password" type="hidden" class="form-control" name="passwd"
                                                placeholder="Password" th:field="*{password}" required="required"/>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="password-confirm" class="col-md-3 control-label">Подтвердите
-                                        пароль</label>
+                                    <label for="role" class="col-md-3 control-label">Роль:</label>
                                     <div class="col-md-9">
-                                        <input id="password-confirm" type="password" class="form-control" name="passwd"
-                                               placeholder="Confirm password" th:field="*{passwordRepeated}"
-                                               required="required"/>
+                                        <select th:field="*{role}" id="role" class="form-control">
+                                            <option th:each="role : ${T(com.demo.domain.Role).values()}"
+                                                    th:value="${role}" th:text="${role}"/>
+                                        </select>
                                     </div>
                                 </div>
-
+                                <input id="id" type="hidden" th:field="*{id}" class="form-control"/>
                                 <div class="form-group">
                                     <div class="col-md-offset-3 col-md-9">
-                                        <input type="submit" value="    Зарегистрироваться" id="signup"
+                                        <input type="submit" value="Изменить" id="signup"
                                                class="btn btn-info"/>
                                     </div>
                                 </div>
+
+
                             </fieldset>
                         </form>
                     </div>

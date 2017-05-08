@@ -7,7 +7,7 @@
 <div>
     <div th:fragment="groupForm">
         <form id="groupForm" th:object="${group}" method="post" data-toggle="validator"
-              action="#" th:action="@{/group/save}" class="pure-form pure-form-aligned" role="form">
+              action="#" th:action="@{/groups/save}" class="pure-form pure-form-aligned" role="form">
             <fieldset>
                 <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
                     <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>

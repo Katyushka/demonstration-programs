@@ -21,15 +21,10 @@ import javax.validation.Valid;
  * @author Ekaterina Pyataeva on 30.04.2017.
  */
 @Controller
-public class GroupController {
+@RequestMapping(value = "/groups")
+public class GroupController extends AbstractController{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupController.class);
-
-    protected static final String PATH_ROOT = "/groups";
-    protected static final String PATH_CREATE = "/group/create";
-    protected static final String PATH_SAVE = "/group/save";
-    protected static final String PATH_GET = "/groups/get/{groupId}";
-    protected static final String PATH_DELETE = "/groups/delete/{groupId}";
 
     @Autowired
     private GroupService groupService;
@@ -43,14 +38,14 @@ public class GroupController {
     }
 
 
-    @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String getGroupCreatePage(Model model) {
         LOGGER.debug("Getting group create form");
         model.addAttribute("form", new Group());
         return "groupCreate";
     }
 
-    @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String handleGroupCreateForm(@Valid @ModelAttribute("form") Group form, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -68,7 +63,7 @@ public class GroupController {
         return "redirect:/";
     }
 
-    @RequestMapping(PATH_ROOT)
+    @RequestMapping(method = RequestMethod.GET)
     @Secured("ROLE_ADMIN")
     public String getGroups(Model model) {
         LOGGER.debug("Getting groups list");
@@ -77,7 +72,7 @@ public class GroupController {
         return "groups";
     }
 
-    @RequestMapping(value = PATH_SAVE, method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String saveGroup(@Valid @ModelAttribute("group") Group group, BindingResult bindingResult) {
         LOGGER.debug("Getting save group action");
@@ -88,7 +83,7 @@ public class GroupController {
         return "redirect:/groups";
     }
 
-    @RequestMapping(PATH_GET)
+    @RequestMapping(value = "/get/{groupId}", method = RequestMethod.GET)
     @Secured("ROLE_ADMIN")
     public String getGroup(@PathVariable("groupId") Long groupId, Model model) {
         LOGGER.debug("Getting get group action" + groupId);
@@ -98,7 +93,7 @@ public class GroupController {
         return "groupForm";
     }
 
-    @RequestMapping(value = PATH_DELETE, method = RequestMethod.POST)
+    @RequestMapping(value = "/delete/{groupId}", method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteGroup(@PathVariable("groupId") Long groupId) {
         LOGGER.debug("Delete group by id action");

@@ -28,13 +28,10 @@ import java.util.List;
 
 
 @Controller
+@RequestMapping(value = "/profile")
 public class ProfileController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProfileController.class);
-
-    protected static final String PATH_ROOT = "/profile";
-    protected static final String PATH_CREATE = "/profile/create";
-    protected static final String PATH_SAVE = "/profile/save";
 
     private static String UPLOADED_FOLDER = "E://osu//5_kurs//files//";
 
@@ -54,7 +51,7 @@ public class ProfileController extends AbstractController {
     }
 
 
-    @RequestMapping(value = PATH_ROOT, method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String getArticleCreatePage(Model model) {
         LOGGER.debug("Getting article create form");
         model.addAttribute("form", new Article());
@@ -65,10 +62,10 @@ public class ProfileController extends AbstractController {
     }
 
 
-    @RequestMapping(value = PATH_ROOT, method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public String handleArticleCreateForm(@Valid @ModelAttribute("form") Article form, BindingResult bindingResult, @RequestParam("file") MultipartFile file) {
 
-        byte[] bytes = new byte[0];
+        byte[] bytes;
         try {
             if (!file.isEmpty()) {
                 bytes = file.getBytes();
@@ -87,13 +84,6 @@ public class ProfileController extends AbstractController {
         if (bindingResult.hasErrors()) {
             return "profile";
         }
-        return "profile";
-    }
-
-
-    @RequestMapping("/profile")
-    public String getIndexPage(Model model) {
-        LOGGER.debug("Getting home page");
         return "profile";
     }
 
