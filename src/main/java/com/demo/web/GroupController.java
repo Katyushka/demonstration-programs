@@ -21,10 +21,15 @@ import javax.validation.Valid;
  * @author Ekaterina Pyataeva on 30.04.2017.
  */
 @Controller
-@RequestMapping(value = "/groups")
 public class GroupController extends AbstractController{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GroupController.class);
+
+    protected static final String PATH_ROOT = "/groups";
+    protected static final String PATH_CREATE = "/groups/create";
+    protected static final String PATH_SAVE = "/groups/save";
+    protected static final String PATH_EDIT = "/groups/edit/{groupId}";
+    protected static final String PATH_DELETE = "/groups/delete/{groupId}";
 
     @Autowired
     private GroupService groupService;
@@ -38,32 +43,32 @@ public class GroupController extends AbstractController{
     }
 
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)
     public String getGroupCreatePage(Model model) {
         LOGGER.debug("Getting group create form");
         model.addAttribute("form", new Group());
         return "groupCreate";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String handleGroupCreateForm(@Valid @ModelAttribute("form") Group form, BindingResult bindingResult) {
+    @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
+    public String handleGroupCreateForm(@Valid @ModelAttribute("group") Group group, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "groupCreate";
         }
         try {
-            Group group = groupService.create(form);
-            CurrentGroup currentGroup = new CurrentGroup(group);
+            Group group1 = groupService.create(group);
+            CurrentGroup currentGroup = new CurrentGroup(group1);
 
         } catch (DataIntegrityViolationException e) {
             LOGGER.warn("Exception occurred when trying to save the group, assuming duplicate email", e);
             bindingResult.reject("email.exists", "Email already exists");
             return "groupCreate";
         }
-        return "redirect:/";
+        return "redirect:/groups";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(PATH_ROOT)
     @Secured("ROLE_ADMIN")
     public String getGroups(Model model) {
         LOGGER.debug("Getting groups list");
@@ -72,28 +77,28 @@ public class GroupController extends AbstractController{
         return "groups";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_SAVE, method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String saveGroup(@Valid @ModelAttribute("group") Group group, BindingResult bindingResult) {
         LOGGER.debug("Getting save group action");
         if (bindingResult.hasErrors()) {
-            return "groupForm";
+            return "groupEdit";
         }
         groupService.save(group);
         return "redirect:/groups";
     }
 
-    @RequestMapping(value = "/get/{groupId}", method = RequestMethod.GET)
+    @RequestMapping(value = PATH_EDIT, method = RequestMethod.GET)
     @Secured("ROLE_ADMIN")
     public String getGroup(@PathVariable("groupId") Long groupId, Model model) {
         LOGGER.debug("Getting get group action" + groupId);
         Group group = groupService.getGroupById(groupId);
         model.addAttribute("group", group);
 
-        return "groupForm";
+        return "groupEdit";
     }
 
-    @RequestMapping(value = "/delete/{groupId}", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_DELETE, method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteGroup(@PathVariable("groupId") Long groupId) {
         LOGGER.debug("Delete group by id action");

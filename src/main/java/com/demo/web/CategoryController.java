@@ -22,10 +22,16 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping(value = "/categories")
 public class CategoryController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
+
+    protected static final String PATH_ROOT = "/categories";
+    protected static final String PATH_CREATE = "/categories/create";
+    protected static final String PATH_SAVE = "/categories/save";
+    protected static final String PATH_EDIT = "/categories/edit/{categoryId}";
+    protected static final String PATH_DELETE = "/categories/delete/{categoryId}";
+
 
     @Autowired
     private CategoryService categoryService;
@@ -39,14 +45,14 @@ public class CategoryController extends AbstractController {
     }
 
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)
     public String getCategoryCreatePage(Model model) {
         LOGGER.debug("Getting category create form");
         model.addAttribute("form", new Category());
         return "categoryCreate";
     }
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_CREATE, method = RequestMethod.POST)
     public String handleCategoryCreateForm(@Valid @ModelAttribute("form") Category form, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -61,7 +67,7 @@ public class CategoryController extends AbstractController {
             bindingResult.reject("email.exists", "Email already exists");
             return "categoryCreate";
         }
-        return "redirect:/";
+        return "redirect:/categories";
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -72,27 +78,27 @@ public class CategoryController extends AbstractController {
         return "categories";
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_SAVE, method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String saveCategory(@Valid @ModelAttribute("category") Category category, BindingResult bindingResult) {
         LOGGER.debug("Getting save category action");
         if (bindingResult.hasErrors()) {
-            return "categoryForm";
+            return "categoryEdit";
         }
         categoryService.save(category);
         return "redirect:/categories";
     }
 
-    @RequestMapping(value = "/get/{categoryId}", method = RequestMethod.GET)
+    @RequestMapping(value = PATH_EDIT, method = RequestMethod.GET)
     @Secured("ROLE_ADMIN")
     public String getCategory(@PathVariable("categoryId") Long categoryId, Model model) {
         LOGGER.debug("Getting get category action" + categoryId);
         Category category = categoryService.getCategoryById(categoryId);
         model.addAttribute("category", category);
-        return "categoryForm";
+        return "categoryEdit";
     }
 
-    @RequestMapping(value = "/delete/{categoryId}", method = RequestMethod.POST)
+    @RequestMapping(value = PATH_DELETE, method = RequestMethod.POST)
     @Secured("ROLE_ADMIN")
     public String deleteCategory(@PathVariable("categoryId") Long categoryId) {
         LOGGER.debug("Delete category by id action");

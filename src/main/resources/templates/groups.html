@@ -11,8 +11,12 @@
           href="../../css/jquery-ui-1.10.4.custom.css"/>
     <link rel="stylesheet" th:href="@{/css/common.css}"
           href="../../css/common.css"/>
+    <link rel="stylesheet" th:href="@{/css/lib/dataTables.bootstrap.min.css}"
+          href="../../css/lib/dataTables.bootstrap.min.css"/>
     <script th:src="@{/js/lib/jquery-1.10.2.js}" src="../../js/lib/jquery-1.10.2.js"/>
     <script th:src="@{/js/lib/jquery-ui-1.10.4.custom.js}" src="../../js/lib/jquery-ui-1.10.4.custom.js"/>
+    <script th:src="@{/js/lib/jquery.dataTables.min.js}" src="../../js/lib/jquery.dataTables.min.js"/>
+    <script th:src="@{/js/lib/dataTables.bootstrap.min.js}" src="../../js/lib/dataTables.bootstrap.min.js"/>
     <script th:src="@{/js/groups.js}" src="../../js/groups.js"/>
 </head>
 <body>
@@ -20,53 +24,43 @@
 
 <div class="container">
     <div style="width: 95%; margin: 0 auto;">
-        <div id="groupDialog" style="display: none;">
-            <div th:replace="groupForm :: groupForm">&nbsp;</div>
-        </div>
-        <div id="dialog-confirm" title="Удалить?" style="display: none;">
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0; "></span>
-                Удалить выбранную группу?</p>
-        </div>
-        <div class="panel panel-primary">
-            <div class="panel-heading"><h2>Список групп</h2></div>
-            <div class="panel-body">
-                <button type="button" class="btn btn-primary" onclick="addGroup()" style="margin-bottom: 10px;">
-                    <i class="fa fa-plus"></i> Добавить группу
-                </button>
-                <br/>
-                <table class="table table-hover table-bordered">
-                    <thead>
-                    <tr>
-                        <th width="20%">Название</th>
-                        <th width="20%">Действие</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="group : ${groups}" th:id="'group-' + ${group.id}">
-                        <td th:text="${group.name}">Название группы</td>
-                        <td>
-                            <nobr>
-                                <button class="btn btn-primary"
-                                        onclick=""
-                                        th:onclick="'javascript:editGroup(\'' + ${group.id} + '\');'">
-                                    <i class="fa fa-pencil"></i> Редактировать
-                                </button>
 
-                                <a class="btn btn-primary"
-                                   onclick="return confirm('Вы уверены, что хотите удалить выбранную группу?');"
-                                   th:onclick="'javascript:deleteGroup(\'' + ${group.id} + '\');'">
-                                    <i class="fa fa-times"></i>Удалить
-                                </a>
-
-                            </nobr>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div class="row">
+            <div class="col-md-8"><h1>Group management</h1></div>
+            <div class="row">
+                <div class="col-md-4 text-right">
+                    <h1><a th:href="@{/groups/create}" class="btn btn-success xcrud-action"><i class="glyphicon glyphicon-plus-sign"></i>&nbsp;&nbsp;</a></h1>
+                </div>
             </div>
+            <table class="table table-hover table-bordered" id="groups">
+                <thead>
+                <tr>
+                    <th width="85%">Название</th>
+                    <th width="20%">Действие</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="group : ${groups}" th:id="'group-' + ${group.id}">
+                    <td th:text="${group.name}">Название группы</td>
+                    <td>
+                        <nobr>
+                            <a class="pull-left btn btn-primary" type="button" title="Edit"
+                               th:href="@{/groups/edit/{id}(id=${group.id})}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            <button class="pull-right btn btn-danger" type="button" title="Delete"
+                                    th:onclick="'javascript:deleteGroup(\'' + ${group.id} + '\');'">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+
+                        </nobr>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
 </div>
+
 </body>
 </html>
