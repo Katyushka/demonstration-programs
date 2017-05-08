@@ -16,19 +16,20 @@
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/users}" href="/users"> Пользователи </a>
                     </li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/groups}" href="/groups"> Группы </a></li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}" href="/categories"> Категории </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}" href="/categories">
+                        Категории </a></li>
                     <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/profile}" href="/profile"> Профиль </a></li>
 
                     <li class="dropdown">
-                        <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{/}" href="#">Категории <b class="caret"></b></a>
+                        <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{/}" href="#">Категории <b
+                                class="caret"></b></a>
                         <ul role="menu" class="dropdown-menu">
-                            <li th:each="category : ${categories}" ><a th:href="@{/articlesList/{categoryId}(categoryId=${category.id})}" th:text="${category.name}"></a>
+                            <li th:each="category : ${categories}"><a
+                                    th:href="@{/articlesList/{categoryId}(categoryId=${category.id})}"
+                                    th:text="${category.name}"></a>
                             </li>
                         </ul>
                     </li>
-
-
-
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

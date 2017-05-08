@@ -18,26 +18,24 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping(value = "/articlesList")
-public class ArticlesListController extends  AbstractController {
+public class ArticlesListController extends AbstractController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ArticlesListController.class);
 
+    protected static final String PATH_ROOT = "articlesList";
     protected static final String PATH_GET = "articlesList/{categoryId}";
 
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(PATH_ROOT)
     public String getIndexPage(Model model) {
         model.addAttribute("articles", articleService.getAllArticles());
-        model.addAttribute("categories", categoryService.getAllCategories());
         LOGGER.debug("Getting home page");
         return "articlesList";
     }
 
-
-    @RequestMapping(value = "/{categoryId}")
+    @RequestMapping(value = PATH_GET)
     public String getArticlesByCategory(@PathVariable("categoryId") Long categoryId, Model model) {
         LOGGER.debug("Getting get articles action " + categoryId);
         List<Article> articles = articleService.getArticlesByCategoryId(categoryId);

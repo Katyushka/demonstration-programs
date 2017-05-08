@@ -44,7 +44,6 @@ public class CategoryController extends AbstractController {
         binder.addValidators(categoryCreateFormValidator);
     }
 
-
     @RequestMapping(value = PATH_CREATE, method = RequestMethod.GET)
     public String getCategoryCreatePage(Model model) {
         LOGGER.debug("Getting category create form");
@@ -70,7 +69,7 @@ public class CategoryController extends AbstractController {
         return "redirect:/categories";
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = PATH_ROOT, method = RequestMethod.GET)
     @Secured("ROLE_ADMIN")
     public String getCategories(Model model) {
         LOGGER.debug("Getting categories list");

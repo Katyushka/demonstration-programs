@@ -5,15 +5,8 @@
     <title>Index</title>
 </head>
 <body>
-
-<form th:action="@{/}" th:object="${model}" th:method="post">
-    <div th:replace="fragments/header :: header">&nbsp;
-
-
-    </div>
-    <th:block layout:fragment="content">
-        <p> Hello</p>
-    </th:block>
-</form>
+<th:block layout:fragment="content">
+    <p> Hello</p>
+</th:block>
 </body>
 </html>
