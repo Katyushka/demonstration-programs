@@ -19,7 +19,8 @@ import java.util.UUID;
 
 @Service
 @Transactional
-public class ArticleService {
+public class
+ArticleService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ArticleService.class);
 

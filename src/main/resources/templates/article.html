@@ -19,6 +19,10 @@
                     <td th:text="${article.description}"></td>
                 </tr>
                 <tr>
+                    <td>Размер:</td>
+                    <td th:text="${article.size*0.000001}+' МБ'"></td>
+                </tr>
+                <tr>
                     <td>Скачать:</td>
                     <td><a th:href="@{/article/download/{articleId}(articleId=${article.id})}"
                            target="_blank">Загрузить</a></td>

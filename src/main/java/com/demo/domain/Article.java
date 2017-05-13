@@ -29,6 +29,9 @@ public class Article extends BasicEntity implements Serializable {
     @Column(nullable = false)
     private byte[] content;
 
+    @Column(nullable = false)
+    private long size;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_article",
@@ -97,5 +100,13 @@ public class Article extends BasicEntity implements Serializable {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
     }
 }

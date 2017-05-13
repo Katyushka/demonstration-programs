@@ -74,6 +74,7 @@ public class ProfileController extends AbstractController {
                 form.setContent(bytes);
                 form.setMimeType(file.getContentType());
                 form.setFileName(file.getOriginalFilename());
+                form.setSize(file.getSize());
             }
         } catch (IOException e) {
             e.printStackTrace();
