@@ -14,7 +14,7 @@
                 <div class="col-md-8"><h1>Category management</h1></div>
                 <div class="row">
                     <div class="col-md-4 text-right">
-                        <h1><a th:href="@{/categories/create}" class="btn btn-success xcrud-action"><i
+                        <h1><a th:href="@{/categories/create}" class="btn btn-success xcrud-action" title="Создать"><i
                                 class="glyphicon glyphicon-plus-sign"></i>&nbsp;&nbsp;</a></h1>
                     </div>
                 </div>
@@ -30,11 +30,11 @@
                         <td th:text="${category.name}">Название категории</td>
                         <td>
                             <nobr>
-                                <a class="pull-left btn btn-primary" type="button" title="Edit"
+                                <a class="pull-left btn btn-primary" type="button" title="Изменить"
                                    th:href="@{/categories/edit/{id}(id=${category.id})}">
                                     <span class="glyphicon glyphicon-edit"></span>
                                 </a>
-                                <button class="pull-right btn btn-danger" type="button" title="Delete"
+                                <button class="pull-right btn btn-danger" type="button" title="Удалить"
                                         th:onclick="'javascript:deleteCategory(\'' + ${category.id} + '\');'">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>

@@ -11,13 +11,6 @@
             <div class="content">
                 <h2>Изменения пользователя</h2>
                 <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <div class="panel-title">Регистрация</div>
-                        <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink"
-                                                                                                   href="#"
-                                                                                                   th:href="@{/login}">Логин</a>
-                        </div>
-                    </div>
                     <div class="panel-body">
                         <form name="form" id="signupform" th:action="@{/users/create}" action="/users/create"
                               method="POST"
@@ -64,12 +57,12 @@
                                     </div>
                                     <span th:errors="*{group}" style="color: red"/>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-9">
+
+                                    <div class="col-md-9" style="display: none">
                                         <input id="password" type="hidden" class="form-control" name="passwd"
                                                placeholder="Password" th:field="*{password}" required="required"/>
                                     </div>
-                                </div>
+
                                 <div class="form-group">
                                     <label for="role" class="col-md-3 control-label">Роль:</label>
                                     <div class="col-md-9">

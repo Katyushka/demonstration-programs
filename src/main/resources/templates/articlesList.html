@@ -6,8 +6,8 @@
 </head>
 <body>
 <th:block layout:fragment="content">
-    <div class="container">
-        <div style="font-size: 16pt; margin: 50px">
+
+        <div style="font-size: 16pt; margin: 30px">
             <div th:each="article : ${articles}">
                 <a href="#" th:href="@{/article/{articleId}(articleId=${article.id})}">
                     <span th:text="${article.name}"></span>
@@ -16,7 +16,7 @@
                 </a>
             </div>
         </div>
-    </div>
+
 </th:block>
 </body>
 </html>

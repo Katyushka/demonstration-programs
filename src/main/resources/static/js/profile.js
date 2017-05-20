@@ -6,7 +6,7 @@ $(document).ready(function () {
         enableFiltering: true,
         includeSelectAllOption: true,
         selectAllText: 'Выбрать всех',
-        buttonWidth: '300px',
+        buttonWidth: '400px',
         buttonText: function(options, select) {
             if (options.length === 0) {
                 return 'Соавтор не выбран ...';

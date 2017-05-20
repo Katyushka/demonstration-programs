@@ -12,7 +12,7 @@
     <div class="container">
         <div style="width: 95%; margin: 0 auto;">
             <div class="row">
-                <div class="col-md-8"><h1>User management</h1></div>
+                <div class="col-md-8" style="margin: 0 auto;" ><h1>User management</h1></div>
                 <table class="table table-hover table-bordered" id="users">
                     <thead>
                     <tr class="info">
@@ -33,11 +33,11 @@
                         <td th:text="${user.group.name}">user group</td>
                         <td>
                             <nobr>
-                                <a class="pull-left btn btn-primary" type="button" title="Edit"
+                                <a class="pull-left btn btn-primary" type="button" title="Изменить"
                                    th:href="@{/users/edit/{id}(id=${user.id})}">
                                     <span class="glyphicon glyphicon-edit"></span>
                                 </a>
-                                <button class="pull-right btn btn-danger" type="button" title="Delete"
+                                <button class="pull-right btn btn-danger" type="button" title="Удалить"
                                         th:onclick="'javascript:deleteUser(\'' + ${user.id} + '\');'">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </button>
