@@ -36,6 +36,8 @@ public class ArticleController extends AbstractController {
     public String getArticleById(@PathVariable("articleId") Long articleId, Model model) {
         LOGGER.debug("Getting get articles action " + articleId);
         Article article = articleService.getArticleById(articleId);
+        article.setJumpCount(article.getJumpCount()+1);
+        articleService.save(article);
         model.addAttribute("article", article);
         return "article";
     }
@@ -45,6 +47,7 @@ public class ArticleController extends AbstractController {
     public ResponseEntity<byte[]> getFile(@PathVariable("articleId") Long articleId, Model model) {
         HttpHeaders headers = new HttpHeaders();
         Article article = articleService.getArticleById(articleId);
+        article.setDownloadCount(article.getDownloadCount()+1);
         if (article == null) {
             return ArticleUtils.get404RedirectEntity(headers);
         }

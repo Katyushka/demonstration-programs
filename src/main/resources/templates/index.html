@@ -6,16 +6,32 @@
 </head>
 <body>
 <th:block layout:fragment="content">
+
     <div class="col-md-6">
+        <label style="font-family: 'Times New Roman', Times, serif; font-size: 250%; color: #4682B4;"> Фонд электронных ресурсов кафедры КБМОИС </label>
         <img th:src="@{/images/osu.jpg}"/>
     </div>
     <div class="col-md-6">
         <div style="margin-left: 20%; max-width: 80%; background-color: #abbceb	; padding: 25px;">
             <div class="form-group">
                 <label class="control-label" style="color: white; font-size: 20px" >Топ популярных ресурсов</label>
+                <div style="font-size: 16pt; margin: 30px">
+                    <div th:each="article : ${articles}">
+                        <a href="#" th:href="@{/article/{articleId}(articleId=${article.id})}">
+                            <span th:text="${article.name}"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label class="control-label" style="color: white; font-size: 20px">Топ популярных категорий</label>
+                <div style="font-size: 16pt; margin: 30px">
+                    <div th:each="category : ${categories}">
+                        <a href="#">
+                            <span th:text="${category.name}"></span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

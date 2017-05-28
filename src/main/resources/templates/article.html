@@ -18,6 +18,10 @@
                     <td>Описание:</td>
                     <td th:text="${article.description}"></td>
                 </tr>
+                <tr th:if="${article.registrationNumber} != 0">
+                    <td>Регистрационный номер:</td>
+                    <td th:text="${article.registrationNumber}"></td>
+                </tr>
                 <tr>
                     <td>Размер:</td>
                     <td th:text="${article.size*0.000001}+' МБ'"></td>
@@ -29,6 +33,19 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="col-md-2">
+                <div style="margin: 0; max-width: 95%; background-color: #F5F5F5; padding: 10px;">
+                    <div class="form-group">
+                        <label> Количество скачиваний:  </label>
+                        <span th:text="${article.downloadCount}"></span>
+                    </div>
+                    <div class="form-group">
+                        <label> Количество просмотров: </label>
+                        <span th:text="${article.jumpCount}"></span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </th:block>
 </div>

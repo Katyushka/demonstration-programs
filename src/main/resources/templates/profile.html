@@ -48,6 +48,14 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="name" class="col-md-3 control-label">Регистрационный номер</label>
+                        <div class="col-md-9 indent">
+                            <input id="registrationNumber" type="text" class="form-control" name="registrationNumber"
+                                   placeholder="Registration Number "
+                                   th:field="*{registrationNumber}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="description" class="col-md-3 control-label">Выберите файл</label>
                         <div class="col-md-9 indent">
                             <input id="input-1" type="file" class="file" data-show-preview="false" name="file"/>

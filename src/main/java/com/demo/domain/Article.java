@@ -32,6 +32,15 @@ public class Article extends BasicEntity implements Serializable {
     @Column(nullable = false)
     private long size;
 
+    @Column(nullable = true)
+    private long jumpCount;
+
+    @Column(nullable = true)
+    private long downloadCount;
+
+    @Column(nullable = true)
+    private long registrationNumber;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_article",
@@ -108,5 +117,29 @@ public class Article extends BasicEntity implements Serializable {
 
     public void setSize(long size) {
         this.size = size;
+    }
+
+    public long getJumpCount() {
+        return jumpCount;
+    }
+
+    public void setJumpCount(long jumpCount) {
+        this.jumpCount = jumpCount;
+    }
+
+    public long getDownloadCount() {
+        return downloadCount;
+    }
+
+    public void setDownloadCount(long downloadCount) {
+        this.downloadCount = downloadCount;
+    }
+
+    public long getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    public void setRegistrationNumber(long registrationNumber) {
+        this.registrationNumber = registrationNumber;
     }
 }
