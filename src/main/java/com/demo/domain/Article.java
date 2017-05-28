@@ -30,13 +30,13 @@ public class Article extends BasicEntity implements Serializable {
     private byte[] content;
 
     @Column(nullable = false)
-    private long size;
+    private Long size;
 
     @Column(nullable = true)
-    private long jumpCount;
+    private Long jumpCount;
 
     @Column(nullable = true)
-    private long downloadCount;
+    private Long downloadCount;
 
     @Column(nullable = true)
     private long registrationNumber;
@@ -142,4 +142,16 @@ public class Article extends BasicEntity implements Serializable {
     public void setRegistrationNumber(long registrationNumber) {
         this.registrationNumber = registrationNumber;
     }
+
+    @Override
+    public String toString() {
+        String authors = "";
+        for (User user : users) {
+            authors += user.getFirstName() + " " + user.getLastName() + ", ";
+        }
+        authors = authors.substring(0, authors.length() - 2);
+        return name + " : " + authors;
+
+    }
+
 }

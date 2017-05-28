@@ -10,9 +10,8 @@
         <div style="font-size: 16pt; margin: 30px">
             <div th:each="article : ${articles}">
                 <a href="#" th:href="@{/article/{articleId}(articleId=${article.id})}">
-                    <span th:text="${article.name}"></span>
-                    <span th:each="user : ${article.users}"
-                          th:text="${user.firstName} + ' ' + ${user.lastName} "></span>
+                    <span th:text="${article.toString()}"></span>
+
                 </a>
             </div>
         </div>

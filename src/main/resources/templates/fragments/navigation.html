@@ -5,7 +5,7 @@
 <body>
 <!-- Navbar -->
 <div class="navigation" id="navigation" th:fragment="navigation">
-    <div class="navbar navbar-default navbar-static-top">
+    <div class="navbar navbar-default navbar-static-top" style="background-color: #f2ee9d;">
         <div class="container">
             <div class="navbar-header">
 
@@ -13,16 +13,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li sec:authorize="isAuthenticated()"><a th:href="@{/}" href="@#"> Главная </a></li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/users}" href="/users"> Пользователи </a>
-                    </li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/groups}" href="/groups"> Группы </a></li>
-                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}" href="/categories">
-                        Категории </a></li>
-                    <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/profile}" href="/profile"> Профиль </a></li>
-
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{/}" href="#">Категории <b
                                 class="caret"></b></a>
+
                         <ul role="menu" class="dropdown-menu">
                             <li th:each="category : ${categories}"><a
                                     th:href="@{/articlesList/{categoryId}(categoryId=${category.id})}"
@@ -30,6 +24,16 @@
                             </li>
                         </ul>
                     </li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/users}" href="/users"> Пользователи </a>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/groups}" href="/groups"> Группы </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}" href="/categories">
+                        Категории </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/articles}" href="/articles"> Ресурсы </a>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/profile}" href="/profile"> Профиль </a></li>
+
+
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

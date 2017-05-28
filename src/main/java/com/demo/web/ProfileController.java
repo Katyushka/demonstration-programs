@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,12 +69,15 @@ public class ProfileController extends AbstractController {
         byte[] bytes;
         try {
             if (!file.isEmpty()) {
-                bytes = file.getBytes();
-                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-                Files.write(path, bytes);
-                form.setContent(bytes);
-                form.setMimeType(file.getContentType());
-                form.setFileName(file.getOriginalFilename());
+                if (!file.getContentType().equals("application/zip: ZIP")) bindingResult.addError(new FieldError("form","file","Введен неверный формат файла!!!"));
+                else {
+                    bytes = file.getBytes();
+                    Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+                    Files.write(path, bytes);
+                    form.setContent(bytes);
+                    form.setMimeType(file.getContentType());
+                    form.setFileName(file.getOriginalFilename());
+                }
                 form.setSize(file.getSize());
             }
         } catch (IOException e) {

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/layoutDefault" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Create article</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="content">
+                <h2>Изменение ресурса</h2>
+                <div class="panel panel-info">
+                    <div class="panel-body">
+                        <form name="form" id="signupform" th:action="@{/articles/save}" action="/articles/save"
+                              method="POST"
+                              class="form-horizontal" role="form" th:object="${form}" data-toggle="validator">
+                            <fieldset>
+                                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                                    <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+                                </div>
+                                <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-md-3 control-label">Название:</label>
+                                    <div class="col-md-9">
+                                        <input id="name" type="text" class="form-control" name="name"
+                                               placeholder="Nmae"
+                                               th:field="*{name}" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="description" class="col-md-3 control-label">Описание:</label>
+                                    <div class="col-md-9">
+                                        <input id="description" type="text" class="form-control" name="description"
+                                               placeholder="Description"
+                                               th:field="*{description}" required="required"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="registrationNumber" class="col-md-3 control-label">Регистрационный номер:</label>
+                                    <div class="col-md-9">
+                                        <input id="registrationNumber" type="text" class="form-control" name="registrationNumber"
+                                               placeholder="RegistrationNumber"
+                                               th:field="*{registrationNumber}" required="required"/>
+                                    </div>
+                                </div>
+                                <input id="size" type="hidden" th:field="*{size}" class="form-control"/>
+                                <input id="fileName" type="hidden" th:field="*{fileName}" class="form-control"/>
+                                <input id="id" type="hidden" th:field="*{id}" class="form-control"/>
+                                <div class="form-group">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <input type="submit" value="Изменить" id="signup"
+                                               class="btn btn-info"/>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</body>
+</html>

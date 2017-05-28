@@ -24,6 +24,7 @@
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/groups}" href="/groups"> Группы </a></li>
                     <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/categories}" href="/categories">
                         Категории </a></li>
+                    <li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/articles}" href="/articles"> Ресурсы </a></li>
                     <li sec:authorize="hasRole('ROLE_USER')"><a th:href="@{/profile}" href="/profile"> Профиль </a></li>
                     <li class="dropdown">
                         <a data-toggle="dropdown" class="dropdown-toggle" th:href="@{/}" href="#">Категории <b

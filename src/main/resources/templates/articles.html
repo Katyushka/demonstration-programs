@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html layout:decorator="layouts/layoutDefault" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Articles management</title>
+    <link rel="stylesheet" th:href="@{/css/lib/dataTables.bootstrap.min.css}"
+          href="../../css/lib/dataTables.bootstrap.min.css"/>
 </head>
 <body>
+<th:block layout:fragment="content">
+    <div class="container">
+        <div style="width: 95%; margin: 0 auto;">
+            <div class="row">
+                <div class="col-md-8" style="margin: 0 auto;" ><h1>Article management</h1></div>
+                <table class="table table-hover table-bordered" id="articles">
+                    <thead>
+                    <tr class="info">
+                        <th width="20%">Название</th>
+                        <th width="40%">Описание</th>
+                        <th width="10%">Название файла</th>
+                        <th width="10%">Размер</th>
+                        <th width="10%">Регистрационный номер</th>
+                        <th width="10%">Действие</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="article : ${articles}" th:id="'article-' + ${article.id}">
+                        <td th:text="${article.name}">article name</td>
+                        <td th:text="${article.description}">article description</td>
+                        <td th:text="${article.fileName}">article fileName</td>
+                        <td th:text="${article.size}">article size</td>
+                        <td th:text="${article.registrationNumber}">article registrationNumber</td>
+                        <td>
+                            <nobr>
+                                <a class="pull-left btn btn-primary" type="button" title="Изменить"
+                                   th:href="@{/articles/edit/{id}(id=${article.id})}">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                                <button class="pull-right btn btn-danger" type="button" title="Удалить"
+                                        th:onclick="'javascript:deleteArticle(\'' + ${article.id} + '\');'">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </nobr>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</th:block>
+<th:block layout:fragment="pageScript">
+    <script th:src="@{/js/lib/jquery.dataTables.min.js}" src="../../js/lib/jquery.dataTables.min.js"/>
+    <script th:src="@{/js/lib/dataTables.bootstrap.min.js}" src="../../js/lib/dataTables.bootstrap.min.js"/>
+    <script th:src="@{/js/articles.js}" src="../../js/articles.js"/>
+</th:block>
 
 </body>
 </html>
